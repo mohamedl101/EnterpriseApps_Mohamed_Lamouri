@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::#content})}">
+<head><title>Contact - NGO Anderlecht</title></head>
+<body>
+<div id="content">
+    <h1 class="mb-4">Contact</h1>
+
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <form th:action="@{/contact}" th:object="${contactForm}" method="post" class="row g-3" style="max-width:600px">
+
+        <div class="col-12">
+            <label class="form-label">Naam *</label>
+            <input type="text" class="form-control" th:field="*{naam}"
+                   th:classappend="${#fields.hasErrors('naam')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('naam')}" th:errors="*{naam}"></div>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">E-mailadres *</label>
+            <input type="email" class="form-control" th:field="*{email}"
+                   th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Onderwerp *</label>
+            <input type="text" class="form-control" th:field="*{onderwerp}"
+                   th:classappend="${#fields.hasErrors('onderwerp')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('onderwerp')}" th:errors="*{onderwerp}"></div>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Bericht *</label>
+            <textarea class="form-control" th:field="*{bericht}" rows="5"
+                      th:classappend="${#fields.hasErrors('bericht')} ? 'is-invalid'"></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('bericht')}" th:errors="*{bericht}"></div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-success">Verstuur bericht</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

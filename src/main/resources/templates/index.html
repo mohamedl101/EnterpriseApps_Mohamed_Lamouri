@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::#content})}">
+<head><title>Events - NGO Anderlecht</title></head>
+<body>
+<div id="content">
+    <h1 class="mb-4">Laatste evenementen</h1>
+    <table class="table table-striped table-hover">
+        <thead class="table-success">
+        <tr>
+            <th>Titel</th>
+            <th>Organisatie</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.titel}"></td>
+            <td th:text="${event.organisatie}"></td>
+            <td><a th:href="@{/details(id=${event.id})}" class="btn btn-sm btn-outline-success">Details</a></td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(events)}">
+            <td colspan="3" class="text-center text-muted">Geen evenementen gevonden.</td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/new}" class="btn btn-success mt-2">+ Nieuw event toevoegen</a>
+</div>
+</body>
+</html>

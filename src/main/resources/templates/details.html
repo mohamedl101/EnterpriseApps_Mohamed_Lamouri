@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::#content})}">
+<head><title>Eventdetails - NGO Anderlecht</title></head>
+<body>
+<div id="content">
+    <h1 class="mb-4" th:text="${event.titel}">Eventdetails</h1>
+    <div class="card" style="max-width:600px">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4">Tijdstip</dt>
+                <dd class="col-sm-8" th:text="${#temporals.format(event.tijdstip,'dd/MM/yyyy HH:mm')}"></dd>
+
+                <dt class="col-sm-4">Omschrijving</dt>
+                <dd class="col-sm-8" th:text="${event.omschrijving}"></dd>
+
+                <dt class="col-sm-4">Organisatie</dt>
+                <dd class="col-sm-8" th:text="${event.organisatie}"></dd>
+
+                <dt class="col-sm-4">E-mail contactpersoon</dt>
+                <dd class="col-sm-8">
+                    <a th:href="'mailto:' + ${event.mailadres}" th:text="${event.mailadres}"></a>
+                </dd>
+
+                <dt class="col-sm-4">Locatie</dt>
+                <dd class="col-sm-8" th:text="${event.locatie.naam}"></dd>
+
+                <dt class="col-sm-4">Adres</dt>
+                <dd class="col-sm-8" th:text="${event.locatie.adres}"></dd>
+
+                <dt class="col-sm-4">Capaciteit</dt>
+                <dd class="col-sm-8" th:text="${event.locatie.capaciteit + ' personen'}"></dd>
+            </dl>
+        </div>
+    </div>
+    <a th:href="@{/}" class="btn btn-outline-secondary mt-3">← Terug naar overzicht</a>
+</div>
+</body>
+</html>

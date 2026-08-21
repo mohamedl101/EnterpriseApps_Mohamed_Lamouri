@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::title}, ~{::#content})}">
+<head><title>Nieuw Event - NGO Anderlecht</title></head>
+<body>
+<div id="content">
+    <h1 class="mb-4">Nieuw evenement toevoegen</h1>
+    <form th:action="@{/new}" th:object="${event}" method="post" class="row g-3" style="max-width:600px">
+
+        <div class="col-12">
+            <label class="form-label">Titel *</label>
+            <input type="text" class="form-control" th:field="*{titel}"
+                   th:classappend="${#fields.hasErrors('titel')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('titel')}" th:errors="*{titel}"></div>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Omschrijving *</label>
+            <textarea class="form-control" th:field="*{omschrijving}" rows="3"
+                      th:classappend="${#fields.hasErrors('omschrijving')} ? 'is-invalid'"></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('omschrijving')}" th:errors="*{omschrijving}"></div>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Organisatie *</label>
+            <input type="text" class="form-control" th:field="*{organisatie}"
+                   th:classappend="${#fields.hasErrors('organisatie')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('organisatie')}" th:errors="*{organisatie}"></div>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">E-mailadres contactpersoon *</label>
+            <input type="email" class="form-control" th:field="*{mailadres}"
+                   th:classappend="${#fields.hasErrors('mailadres')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('mailadres')}" th:errors="*{mailadres}"></div>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Tijdstip *</label>
+            <input type="datetime-local" class="form-control" th:field="*{tijdstip}"
+                   th:classappend="${#fields.hasErrors('tijdstip')} ? 'is-invalid'">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('tijdstip')}" th:errors="*{tijdstip}"></div>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Locatie *</label>
+            <select class="form-select" th:field="*{locatie}"
+                    th:classappend="${#fields.hasErrors('locatie')} ? 'is-invalid'">
+                <option value="">-- Kies een locatie --</option>
+                <option th:each="loc : ${locaties}"
+                        th:value="${loc.id}"
+                        th:text="${loc.naam + ' (' + loc.adres + ')'}"></option>
+            </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('locatie')}" th:errors="*{locatie}"></div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-success">Opslaan</button>
+            <a th:href="@{/}" class="btn btn-outline-secondary ms-2">Annuleren</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
